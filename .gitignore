@@ -1,0 +1,9 @@
+node_modules
+.next
+.tmp
+.idea
+.history
+db
+.env
+.env.production
+deleteChannels.config.js

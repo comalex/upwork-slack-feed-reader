@@ -1,0 +1,18 @@
+{
+  "name": "slack",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "amo-html-to-mrkdwn": "^3.4.1",
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.1",
+    "dotenv-flow": "^3.2.0",
+    "nedb": "^1.8.0",
+    "rss-feed-emitter": "^3.2.3",
+    "simple-json-db": "^2.0.0"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}
