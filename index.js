@@ -49,26 +49,38 @@ const subscribe = async (evenName, item) => {
 
 const feed = async () => {
   const feeder = new RssFeedEmitter();
-  feeder.add({
-    url: process.env.FEED1URL,
-    refresh: 60000 * 2,
-    skipFirstLoad: true,
-    eventName: 'reactOnly' //React+Nextjs only
-  });
+  
+  const feeds = [
+    {
+      feedUrl: process.env.FEED1URL,
+      key: "reactOnly",
+      refresh: 60000 * 2,
+      label: "React+Nextjs only"
+    },
+    {
+      feedUrl: process.env.FEED2URL, //Web/mobile country filtered
+      key: "website",
+      label: "website/mobile",
+    },
+    {
+      feedUrl: process.env.FEED3URL, //Web/mobile country filtered
+      key: "python",
+      label: "python",
+    }
+  ]
 
-  feeder.add({
-    url: process.env.FEED2URL,
-    refresh: 60000*3,
-    skipFirstLoad: true,
-    eventName: 'website' //Web/mobile country filtered
-  });
-
-  feeder.on('reactOnly', async function(item) {
-    await subscribe("React+Nextjs only", item)
+  feeds.forEach(({ feedUrl, key, refresh, label }) => {
+    feeder.add({
+      url: feedUrl,
+      refresh: refresh || 60000 * 3,
+      skipFirstLoad: true,
+      eventName: key 
+    });
+    feeder.on(key, async function(item) {
+      await subscribe(label, item)
+    })
   })
-  feeder.on('website', async function(item) {
-    await subscribe("website/mobile", item)
-  })
+  
   feeder.on('error', (err) => {
     slackErrorMessage(err);
     console.log(err);
