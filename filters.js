@@ -14,6 +14,7 @@ const COMMON = [
   "teach me", "teach us",
   "data entry",
   "chrome extension",
+  "Please don't apply if you are an agency",
 ]
 
 const SKIP_LANGUAGES = [
